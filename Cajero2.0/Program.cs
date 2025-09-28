@@ -12,34 +12,34 @@ class program
 
         //Comenzaremos con el proceso de autenticacion
 
-        int intentos = 0;
-        bool acceso = false;
-        while (intentos < 3 && !acceso)
+        int intentos = 0;//Contador de intentos
+        bool acceso = false;//Variable que indica si el usuario tiene acceso o no
+        while (intentos < 3 && !acceso)//El usuario tiene 3 intentos para ingresar la clave
         {
             Console.WriteLine("Ingrese su clave:");
-            string claveIngresada = Console.ReadLine();
-            if (Cuenta.VerificarClave(claveIngresada))
+            string claveIngresada = Console.ReadLine();//Lee la clave ingresada por el usuario
+            if (Cuenta.VerificarClave(claveIngresada))//Verifica si la clave es correcta
             {
-                acceso = true;
+                acceso = true;//Si la clave es correcta, el usuario tiene acceso
                 Console.WriteLine("Acceso concedido. Bienvenido a su cuenta.");
-                Console.ReadKey();
+                Console.ReadKey();//Espera a que el usuario presione una tecla
             }
-            else
+            else//Si la clave es incorrecta
             {
-                intentos++;
-                Console.WriteLine("Clave incorrecta. Intentos restantes: " + (3 - intentos));
-                Console.ReadKey();
+                intentos++;//Incrementa el contador de intentos
+                Console.WriteLine("Clave incorrecta. Intentos restantes: " + (3 - intentos));//Muestra los intentos restantes
+                Console.ReadKey();//Espera a que el usuario presione una tecla
             }
         }
 
-        int opcion = 0;
-        do
+        int opcion = 0;//Variable que almacena la opcion del menu
+        do//Menu principal
         {
-            if (!acceso)
+            if (!acceso)//Si el usuario no tiene acceso, sale del sistema
             {
                 Console.WriteLine("Demasiados intentos fallidos. Saliendo del sistema.");
                 break;
-            }
+            }//Si el usuario tiene acceso, muestra el menu
             Console.WriteLine("____________________________________");
             Console.WriteLine("|       == MENÚ PRINCIPAL ==       |");
             Console.WriteLine("|----------------------------------|");
@@ -56,45 +56,45 @@ class program
             Console.WriteLine("|6.            Salir               |");
             Console.WriteLine("|__________________________________|");
 
-            opcion = int.Parse(Console.ReadLine());
+            opcion = int.Parse(Console.ReadLine());//Lee la opcion ingresada por el usuario
             switch (opcion)
             {
                 case 1:
                     Console.Clear();
                     Console.WriteLine("Ingrese el monto a depositar:");
-                    double MontoDeposito = double.Parse(Console.ReadLine());
-                    Cuenta.Depositar(MontoDeposito);
+                    double MontoDeposito = double.Parse(Console.ReadLine());//Lee el monto a depositar
+                    Cuenta.Depositar(MontoDeposito);//Llama al metodo Depositar
                     break;
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Ingrese el monto a retirar:");
-                    double MontoRetiro = double.Parse(Console.ReadLine());
-                    Cuenta.Retirar(MontoRetiro);
+                    double MontoRetiro = double.Parse(Console.ReadLine());//Lee el monto a retirar
+                    Cuenta.Retirar(MontoRetiro);//Llama al metodo Retirar
                     break;
                 case 3:
                     Console.Clear();
-                    Cuenta.ConsultarSaldo();
+                    Cuenta.ConsultarSaldo();//Llama al metodo ConsultarSaldo
                     break;
                 case 4:
                     Console.Clear();
-                    Cuenta.ConsultarMovimientos();
+                    Cuenta.ConsultarMovimientos();//Llama al metodo ConsultarMovimientos
                     break;
                 case 5:
                     Console.Clear();
                     Console.WriteLine("Ingrese su clave actual:");
-                    string ClaveActual = Console.ReadLine();
+                    string ClaveActual = Console.ReadLine();//Lee la clave actual
                     Console.WriteLine("Ingrese su nueva clave:");
-                    string NuevaClave = Console.ReadLine();
-                    Cuenta.CambiarClave(ClaveActual, NuevaClave);
+                    string NuevaClave = Console.ReadLine();//Lee la nueva clave
+                    Cuenta.CambiarClave(ClaveActual, NuevaClave);//Llama al metodo CambiarClave
                     break;
                 case 6:
                     Console.Clear();
                     Console.WriteLine("Gracias por usar el cajero. ¡Hasta luego!");
                     break;
-                default:
+                default://Si la opcion no es valida
                     Console.WriteLine("Opción no válida. Intente de nuevo.");
                     break;
             }
-        } while (opcion != 6 && acceso);
+        } while (opcion != 6 && acceso);//El menu se repite hasta que el usuario elija salir o no tenga acceso
     }
 }

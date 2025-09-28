@@ -107,7 +107,7 @@ namespace Cajero
         }
         public void ConsultarMovimientos()//Este metodo consulta los ultimos movimientos de la cuenta
         {
-            Console.WriteLine("=====ULTIMOS MOVIMIENTOS=====");//Muestra el titulo
+            Console.WriteLine("\n=====ULTIMOS MOVIMIENTOS=====");//Muestra el titulo
             foreach (var movimiento in movimientos)//Recorre la lista de movimientos
             {
                 Console.WriteLine(movimiento);//Muestra cada movimiento
