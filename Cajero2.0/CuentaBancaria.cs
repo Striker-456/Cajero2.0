@@ -28,10 +28,10 @@ namespace Cajero
         public CuentaBancaria(string NumeroCuenta)
         {
             this.NumeroCuenta = NumeroCuenta;// Asigna el numero de cuenta a la variable de instancia
-            ArchivoCuenta = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}";// Carpeta para guardar los archivos de cada usuario
-            ArchivoSaldo =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\Saldo.txt";// Ruta completa del archivo de saldo
-            ArchivoClave =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\clave.txt";// Ruta completa del archivo de clave
-            ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\\\usuario{NumeroCuenta}\\movimientos.txt";
+            ArchivoCuenta = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}";//Ruta del directorio de la cuenta
+            ArchivoSaldo =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\Saldo.txt";//Ruta del archivo de saldo
+            ArchivoClave =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\clave.txt";//Ruta del archivo de clave
+            ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\\\usuario{NumeroCuenta}\\movimientos.txt";//Ruta del archivo de movimientoss
 
             Movimientos = new List<string>();   //Con este comando esta inicializando la lista
 

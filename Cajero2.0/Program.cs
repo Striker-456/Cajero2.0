@@ -31,7 +31,7 @@ class program
                 Console.ReadKey();//Espera a que el usuario presione una tecla
             }
         }
-
+        Console.Clear();
         int opcion = 0;//Variable que almacena la opcion del menu
         do//Menu principal
         {
@@ -64,20 +64,24 @@ class program
                     Console.WriteLine("Ingrese el monto a depositar:");//Pide el monto a depositar
                     double MontoDeposito = double.Parse(Console.ReadLine());//Lee el monto a depositar
                     Cuenta.Depositar(MontoDeposito);//Llama al metodo Depositar
+                    Console.Clear();
                     break;
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Ingrese el monto a retirar:");
                     double MontoRetiro = double.Parse(Console.ReadLine());//Lee el monto a retirar
                     Cuenta.Retirar(MontoRetiro);//Llama al metodo Retirar
+                    Console.Clear();
                     break;
                 case 3:
                     Console.Clear();
                     Cuenta.ConsultarSaldo();//Llama al metodo ConsultarSaldo
+                    Console.Clear();
                     break;
                 case 4:
                     Console.Clear();
                     Cuenta.ConsultarMovimientos();//Llama al metodo ConsultarMovimientos
+                    Console.Clear();
                     break;
                 case 5:
                     Console.Clear();
@@ -86,13 +90,18 @@ class program
                     Console.WriteLine("Ingrese su nueva clave:");
                     string NuevaClave = Console.ReadLine();//Lee la nueva clave
                     Cuenta.CambiarClave(ClaveActual, NuevaClave);//Llama al metodo CambiarClave
+                    Console.Clear();
                     break;
                 case 6:
                     Console.Clear();
                     Console.WriteLine("Gracias por usar el cajero. ¡Hasta luego!");
+
                     break;
                 default://Si la opcion no es valida
+                    Console.Clear();
                     Console.WriteLine("Opción no válida. Intente de nuevo.");
+                    Console.ReadKey();
+                    Console.Clear();
                     break;
             }
         } while (opcion != 6 && acceso);//El menu se repite hasta que el usuario elija salir o no tenga acceso
