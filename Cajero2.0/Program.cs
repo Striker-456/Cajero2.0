@@ -61,7 +61,7 @@ class program
             {
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Ingrese el monto a depositar:");
+                    Console.WriteLine("Ingrese el monto a depositar:");//Pide el monto a depositar
                     double MontoDeposito = double.Parse(Console.ReadLine());//Lee el monto a depositar
                     Cuenta.Depositar(MontoDeposito);//Llama al metodo Depositar
                     break;

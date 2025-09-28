@@ -78,7 +78,7 @@ namespace Cajero
             Console.Clear();
             Saldo += Monto; //Suma el monto al saldo
             RegistrarMovimiento($"Depósito: {Monto}");//Registra el movimiento
-            Console.WriteLine("Deposito realizado con exito");
+            Console.WriteLine("Deposito realizado con exito");//Mensaje de exito
             Console.ReadKey();//Espera a que el usuario presione una tecla
             Console.WriteLine($"Se ha depositado {Monto}. Nuevo saldo: {Saldo}");// Muestra el nuevo saldo
             GuardarSaldo(); //Guarda el saldo en el archivo
