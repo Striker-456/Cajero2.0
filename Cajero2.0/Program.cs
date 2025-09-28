@@ -60,22 +60,27 @@ class program
             switch (opcion)
             {
                 case 1:
+                    Console.Clear();
                     Console.WriteLine("Ingrese el monto a depositar:");
                     double MontoDeposito = double.Parse(Console.ReadLine());
                     Cuenta.Depositar(MontoDeposito);
                     break;
                 case 2:
+                    Console.Clear();
                     Console.WriteLine("Ingrese el monto a retirar:");
                     double MontoRetiro = double.Parse(Console.ReadLine());
                     Cuenta.Retirar(MontoRetiro);
                     break;
                 case 3:
+                    Console.Clear();
                     Cuenta.ConsultarSaldo();
                     break;
                 case 4:
+                    Console.Clear();
                     Cuenta.ConsultarMovimientos();
                     break;
                 case 5:
+                    Console.Clear();
                     Console.WriteLine("Ingrese su clave actual:");
                     string ClaveActual = Console.ReadLine();
                     Console.WriteLine("Ingrese su nueva clave:");
@@ -83,6 +88,7 @@ class program
                     Cuenta.CambiarClave(ClaveActual, NuevaClave);
                     break;
                 case 6:
+                    Console.Clear();
                     Console.WriteLine("Gracias por usar el cajero. ¡Hasta luego!");
                     break;
                 default:
