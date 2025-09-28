@@ -27,11 +27,11 @@ namespace Cajero
 
         public CuentaBancaria(string NumeroCuenta)
         {
-            NumeroCuenta = NumeroCuenta;
-            ArchivoCuenta = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}";// Ruta del directorio de la cuenta
-            ArchivoSaldo = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\Saldo.txt";// Ruta del archivo de saldo
-            ArchivoClave = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\clave.txt";// Ruta del archivo de la clave
-            ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\\\usuario{NumeroCuenta}\\movimientos.txt";// Ruta del archivo de movimientos
+            this.NumeroCuenta = NumeroCuenta;// Asigna el numero de cuenta a la variable de instancia
+            ArchivoCuenta = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}";// Carpeta para guardar los archivos de cada usuario
+            ArchivoSaldo =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\Saldo.txt";// Ruta completa del archivo de saldo
+            ArchivoClave =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\clave.txt";// Ruta completa del archivo de clave
+            ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\\\usuario{NumeroCuenta}\\movimientos.txt";
 
             movimientos = new List<string>();   //Con este comando esta inicializando la lista
 
@@ -69,14 +69,15 @@ namespace Cajero
             Clave = NuevaClave; //Asigna la nueva clave a la variable Clave
             File.WriteAllText(ArchivoClave, NuevaClave); //Escribe la nueva clave en el archivo
             Console.WriteLine("Clave cambiada con exito");
-            RegistrarMovimiento($"Cambio de clave | {DateTime.Now}");//Registra el movimiento
-            Console.ReadKey();//Espera a que el usuario presione una tecla
+            RegistrarMovimiento($"Cambio de clave ");
+            Console.ReadKey();
 
         }
         public void Depositar(double Monto)//Este metodo deposita dinero en la cuenta
         {
+            Console.Clear();
             Saldo += Monto; //Suma el monto al saldo
-            RegistrarMovimiento($"Depósito: {Monto} | {DateTime.Now}");//Registra el movimiento
+            RegistrarMovimiento($"Depósito: {Monto}");//Registra el movimiento
             Console.WriteLine("Deposito realizado con exito");
             Console.ReadKey();//Espera a que el usuario presione una tecla
             Console.WriteLine($"Se ha depositado {Monto}. Nuevo saldo: {Saldo}");// Muestra el nuevo saldo
@@ -108,15 +109,15 @@ namespace Cajero
         public void ConsultarMovimientos()//Este metodo consulta los ultimos movimientos de la cuenta
         {
             Console.WriteLine("\n=====ULTIMOS MOVIMIENTOS=====");//Muestra el titulo
-            foreach (var movimiento in movimientos)//Recorre la lista de movimientos
+            foreach (var Movimiento in movimientos)//Recorre la lista de movimientos
             {
-                Console.WriteLine(movimiento);//Muestra cada movimiento
+                Console.WriteLine(Movimiento);//Muestra cada movimiento
             }
             Console.ReadKey();//Espera a que el usuario presione una tecla
         }
-        private void RegistrarMovimiento(string movimiento)//Este metodo registra un movimiento en la lista y en el archivo
+        private void RegistrarMovimiento(string Movimiento)//Este metodo registra un movimiento en la lista y en el archivo
         {
-            string Registro = $"cuenta {NumeroCuenta}: {movimiento} | {DateTime.Now}";//Crea el registro del movimiento
+            string Registro = $"cuenta {NumeroCuenta}: {Movimiento} | {DateTime.Now}";//Crea el registro del movimiento
             movimientos.Add(Registro); //Agrega el movimiento a la lista
             File.AppendAllText(ArchivoMovimientos, Registro + Environment.NewLine); //Escribe el movimiento en el archivo
         }
