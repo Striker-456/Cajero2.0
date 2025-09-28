@@ -88,7 +88,7 @@ namespace Cajero
             if (Monto <= Saldo)//Verifica si hay saldo suficiente
             {
                 Saldo -= Monto; //Resta el monto al saldo
-                RegistrarMovimiento($"Retiro: {Monto} | {DateTime.Now}");//Registra el movimiento
+                RegistrarMovimiento($"Retiro: {Monto}");//Registra el movimiento
             }
             else
             {
