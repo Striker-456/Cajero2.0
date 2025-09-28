@@ -71,7 +71,6 @@ namespace Cajero
             Console.WriteLine("Clave cambiada con exito");
             RegistrarMovimiento($"Cambio de clave ");
             Console.ReadKey();
-
         }
         public void Depositar(double Monto)//Este metodo deposita dinero en la cuenta
         {
