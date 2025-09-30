@@ -6,9 +6,9 @@ class program
     static void Main(string[] args)
     {
         Console.WriteLine("Ingrese su numero de cuenta:");
-        string numeroCuenta = Console.ReadLine();
+        string NumeroCuenta = Console.ReadLine();
 
-        CuentaBancaria Cuenta = new CuentaBancaria(numeroCuenta); // Crea una instancia de CuentaBancaria
+        CuentaBancaria Cuenta = new CuentaBancaria(NumeroCuenta); // Crea una instancia de CuentaBancaria
 
         //Comenzaremos con el proceso de autenticacion
 

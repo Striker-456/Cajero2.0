@@ -31,7 +31,7 @@ namespace Cajero
             ArchivoCuenta = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}";//Ruta del directorio de la cuenta
             ArchivoSaldo =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\Saldo.txt";//Ruta del archivo de saldo
             ArchivoClave =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\clave.txt";//Ruta del archivo de clave
-            ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\\\usuario{NumeroCuenta}\\movimientos.txt";//Ruta del archivo de movimientoss
+            ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\movimientos.txt";//Ruta del archivo de movimientoss
 
             Movimientos = new List<string>();   //Con este comando esta inicializando la lista
 
@@ -49,10 +49,10 @@ namespace Cajero
             if (!File.Exists(ArchivoMovimientos))// Si el archivo de movimientos no existe, lo crea
                 File.Create(ArchivoMovimientos).Close();
 
-            Saldo = double.Parse(File.ReadAllText(ArchivoSaldo)); //Lee el saldo del archivo y lo asigna a la variable Saldo
 
-            string[] lineas = File.ReadAllLines(ArchivoMovimientos);//Lee todas las lineas del archivo de movimientos y las asigna a un array
-            Movimientos.AddRange(lineas);
+
+            string[] Lineas = File.ReadAllLines(ArchivoMovimientos);//Lee todas las lineas del archivo de movimientos y las asigna a un array
+            Movimientos.AddRange(Lineas);
         }
         public bool VerificarClave(string claveIngresada)//Este metodo verifica si la clave ingresada es correcta
         {
