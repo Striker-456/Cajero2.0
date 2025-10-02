@@ -74,14 +74,23 @@ namespace Cajero
         }
         public void Depositar(double Monto)//Este metodo deposita dinero en la cuenta
         {
-            Console.Clear();
-            Saldo += Monto; //Suma el monto al saldo
-            RegistrarMovimiento($"Depósito: {Monto}");//Registra el movimiento
-            Console.WriteLine("Deposito realizado con exito");//Mensaje de exito
-            Console.ReadKey();//Espera a que el usuario presione una tecla
-            Console.WriteLine($"Se ha depositado {Monto}. Nuevo saldo: {Saldo}");// Muestra el nuevo saldo
-            GuardarSaldo(); //Guarda el saldo en el archivo
-            Console.ReadKey();//Espera a que el usuario presione una tecla
+            if (Monto >= 0)
+            {
+                Console.Clear();
+                Saldo += Monto; //Suma el monto al saldo
+                RegistrarMovimiento($"Depósito: {Monto}");//Registra el movimiento
+                Console.WriteLine("Deposito realizado con exito");//Mensaje de exito
+                Console.ReadKey();//Espera a que el usuario presione una tecla
+                Console.WriteLine($"Se ha depositado {Monto}. Nuevo saldo: {Saldo}");// Muestra el nuevo saldo
+                GuardarSaldo(); //Guarda el saldo en el archivo
+                Console.ReadKey();//Espera a que el usuario presione una tecla
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Ingrese monto mayor a 0");
+                Console.ReadKey();
+            }
         }
         public void Retirar(double Monto)//Este metodo retira dinero de la cuenta
         {

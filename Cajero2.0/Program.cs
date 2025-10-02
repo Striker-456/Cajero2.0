@@ -4,12 +4,14 @@
 class program
 {
     static void Main(string[] args)
+
     {
+
         Console.WriteLine("Ingrese su numero de cuenta:");
         string NumeroCuenta = Console.ReadLine();
 
-        CuentaBancaria Cuenta = new CuentaBancaria(NumeroCuenta); // Crea una instancia de CuentaBancaria
-
+        CuentaBancaria Cuenta = new CuentaBancaria("123456789"); // Crea una instancia de CuentaBancaria
+        CuentaBancaria cuenta2 = new CuentaBancaria("987654321"); // Crea una segunda instancia de CuentaBancaria
         //Comenzaremos con el proceso de autenticacion
 
         int intentos = 0;//Contador de intentos
@@ -55,24 +57,60 @@ class program
             Console.WriteLine("|__________________________________|");
             Console.WriteLine("|6.            Salir               |");
             Console.WriteLine("|__________________________________|");
+            Console.WriteLine("|      Seleccione una opcion       |");
+            Console.WriteLine("|__________________________________|");
+            String entrada = Console.ReadLine();//Lee la opcion ingresada por el usuario
 
-            opcion = int.Parse(Console.ReadLine());//Lee la opcion ingresada por el usuario
-            switch (opcion)
+
+            if (!int.TryParse(entrada, out opcion))//Verifica si la entrada es un numero
+            {
+                  Console.Clear();
+                Console.WriteLine("Entrada inválida. Por favor, ingrese un número del 1 al 6.");
+                Console.ReadKey();
+                Console.Clear();
+                continue; // Vuelve al inicio del bucle
+            }
+            if (opcion < 1 || opcion > 6)
+            {
+                Console.Clear();
+                Console.WriteLine("Opción no válida. Intente de nuevo.");
+                Console.ReadKey();
+                Console.Clear();
+                continue; // Vuelve al inicio del bucle
+            }
+                switch (opcion)
             {
                 case 1:
                     Console.Clear();
                     Console.WriteLine("Ingrese el monto a depositar:");//Pide el monto a depositar
-                    double MontoDeposito = double.Parse(Console.ReadLine());//Lee el monto a depositar
+                    if(double.TryParse(Console.ReadLine(), out double MontoDeposito)) 
+                    {
                     Cuenta.Depositar(MontoDeposito);//Llama al metodo Depositar
                     Console.Clear();
-                    break;
+                    }
+                    else 
+                    {
+                           
+                        Console.WriteLine("Monto inválido. Por favor, ingrese un número válido.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                        break;
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Ingrese el monto a retirar:");
-                    double MontoRetiro = double.Parse(Console.ReadLine());//Lee el monto a retirar
-                    Cuenta.Retirar(MontoRetiro);//Llama al metodo Retirar
-                    Console.Clear();
-                    break;
+                    if (double.TryParse(Console.ReadLine(), out double MontoRetiro))
+                    {
+                        Cuenta.Retirar(MontoRetiro);//Llama al metodo Retirar
+                        Console.Clear();
+                    }
+                    else
+                    {
+                            Console.WriteLine("Monto inválido. Por favor, ingrese un número válido.");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+                        break;
                 case 3:
                     Console.Clear();
                     Cuenta.ConsultarSaldo();//Llama al metodo ConsultarSaldo
