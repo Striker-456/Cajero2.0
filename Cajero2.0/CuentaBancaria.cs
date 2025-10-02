@@ -15,6 +15,7 @@ namespace Cajero
         CuentaBancaria
     {
         public string NumeroCuenta { get; private set; }// El numero de cuenta es publico para que pueda ser accedido desde fuera de la clase
+        public string Titular { get; private set; }// El titular es publico para que pueda ser accedido desde fuera de la clase
         private string Clave;// La clave es privada para que no pueda ser accedida desde fuera de la clase
         public double Saldo { get; private set; }// El saldo es publico para que pueda ser accedido desde fuera de la clase pero solo puede ser modificado desde dentro de la clase
 
@@ -25,12 +26,13 @@ namespace Cajero
         public string ArchivoCuenta;
 
 
-        public CuentaBancaria(string NumeroCuenta)
+        public CuentaBancaria(string NumeroCuenta, string titular)
         {
+            this.Titular = titular;
             this.NumeroCuenta = NumeroCuenta;// Asigna el numero de cuenta a la variable de instancia
             ArchivoCuenta = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}";//Ruta del directorio de la cuenta
-            ArchivoSaldo =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\Saldo.txt";//Ruta del archivo de saldo
-            ArchivoClave =$"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\clave.txt";//Ruta del archivo de clave
+            ArchivoSaldo = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\Saldo.txt";//Ruta del archivo de saldo
+            ArchivoClave = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\clave.txt";//Ruta del archivo de clave
             ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\movimientos.txt";//Ruta del archivo de movimientoss
 
             Movimientos = new List<string>();   //Con este comando esta inicializando la lista
@@ -53,6 +55,7 @@ namespace Cajero
 
             string[] Lineas = File.ReadAllLines(ArchivoMovimientos);//Lee todas las lineas del archivo de movimientos y las asigna a un array
             Movimientos.AddRange(Lineas);
+            Titular = titular;
         }
         public bool VerificarClave(string claveIngresada)//Este metodo verifica si la clave ingresada es correcta
         {

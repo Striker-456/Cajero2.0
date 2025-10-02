@@ -6,12 +6,16 @@ class program
     static void Main(string[] args)
 
     {
-
+        List<CuentaBancaria> cuentas = new List<CuentaBancaria>()
+        {
+            new CuentaBancaria("123456789", "Hector"),
+            new CuentaBancaria("987654321", "Maria"),
+        };
         Console.WriteLine("Ingrese su numero de cuenta:");
         string NumeroCuenta = Console.ReadLine();
 
-        CuentaBancaria Cuenta = new CuentaBancaria("123456789"); // Crea una instancia de CuentaBancaria
-        CuentaBancaria cuenta2 = new CuentaBancaria("987654321"); // Crea una segunda instancia de CuentaBancaria
+        CuentaBancaria Cuenta = new CuentaBancaria(NumeroCuenta); // Crea una instancia de CuentaBancaria
+         // Crea una segunda instancia de CuentaBancaria
         //Comenzaremos con el proceso de autenticacion
 
         int intentos = 0;//Contador de intentos
