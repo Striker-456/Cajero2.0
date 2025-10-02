@@ -6,36 +6,69 @@ class program
     static void Main(string[] args)
 
     {
-        List<CuentaBancaria> cuentas = new List<CuentaBancaria>()
+        List<CuentaBancaria> cuentas = new List<CuentaBancaria>()//Lista de cuentas predefinidas
         {
             new CuentaBancaria("123456789", "Hector"),
             new CuentaBancaria("987654321", "Maria"),
         };
-        Console.WriteLine("Ingrese su numero de cuenta:");
-        string NumeroCuenta = Console.ReadLine();
+        CuentaBancaria CuentaSeleccionada = null;//Cuenta seleccionada por el usuario
 
-        CuentaBancaria Cuenta = new CuentaBancaria(NumeroCuenta); // Crea una instancia de CuentaBancaria
-         // Crea una segunda instancia de CuentaBancaria
-        //Comenzaremos con el proceso de autenticacion
+        while (true)//Bucle para seleccionar la cuenta
+        {
+            Console.WriteLine("Ingrese su numero de cuenta:");
+            string numeroCuenta = Console.ReadLine();
+
+
+            if (numeroCuenta?.ToLower() == "Salir")//Si el usuario escribe "Salir", sale del sistema
+            {
+                Console.WriteLine("Saliendo del sistema. ¡Hasta luego!");
+                return;
+            }
+            CuentaSeleccionada = cuentas.Find(c => c.NumeroCuenta == numeroCuenta);//Busca la cuenta en la lista de cuentas
+
+            if (CuentaSeleccionada == null)//Si la cuenta no existe, muestra un mensaje de error
+            {
+                Console.WriteLine("Numero de cuenta no encontrado. Intente de nuevo o escriba 'Salir' para salir.");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else//Si la cuenta existe, sale del bucle
+            {
+                break;
+            }
+        }
+        Console.Clear();
+
+
 
         int intentos = 0;//Contador de intentos
         bool acceso = false;//Variable que indica si el usuario tiene acceso o no
-        while (intentos < 3 && !acceso)//El usuario tiene 3 intentos para ingresar la clave
+        while (intentos < 3 && !acceso)
         {
+            Console.WriteLine("____________________________________");
+            Console.WriteLine($"        Bienvenido {CuentaSeleccionada.Titular}");
+            Console.WriteLine("____________________________________");
             Console.WriteLine("Ingrese su clave:");
-            string claveIngresada = Console.ReadLine();//Lee la clave ingresada por el usuario
-            if (Cuenta.VerificarClave(claveIngresada))//Verifica si la clave es correcta
+            string claveIngresada = Console.ReadLine();
+            Console.Clear();
+            if (CuentaSeleccionada.VerificarClave(claveIngresada))
             {
-                acceso = true;//Si la clave es correcta, el usuario tiene acceso
+                acceso = true;
                 Console.WriteLine("Acceso concedido. Bienvenido a su cuenta.");
-                Console.ReadKey();//Espera a que el usuario presione una tecla
+                Console.ReadKey();
             }
-            else//Si la clave es incorrecta
+            else
             {
-                intentos++;//Incrementa el contador de intentos
-                Console.WriteLine("Clave incorrecta. Intentos restantes: " + (3 - intentos));//Muestra los intentos restantes
-                Console.ReadKey();//Espera a que el usuario presione una tecla
+                intentos++;
+                Console.WriteLine("Clave incorrecta. Intentos restantes: " + (3 - intentos));
+                Console.ReadKey();
             }
+        }
+
+        if (!acceso)
+        {
+            Console.WriteLine("Demasiados intentos fallidos. Saliendo del sistema...");
+            return;
         }
         Console.Clear();
         int opcion = 0;//Variable que almacena la opcion del menu
@@ -68,7 +101,7 @@ class program
 
             if (!int.TryParse(entrada, out opcion))//Verifica si la entrada es un numero
             {
-                  Console.Clear();
+                Console.Clear();
                 Console.WriteLine("Entrada inválida. Por favor, ingrese un número del 1 al 6.");
                 Console.ReadKey();
                 Console.Clear();
@@ -82,47 +115,47 @@ class program
                 Console.Clear();
                 continue; // Vuelve al inicio del bucle
             }
-                switch (opcion)
+            switch (opcion)
             {
                 case 1:
                     Console.Clear();
                     Console.WriteLine("Ingrese el monto a depositar:");//Pide el monto a depositar
-                    if(double.TryParse(Console.ReadLine(), out double MontoDeposito)) 
+                    if (double.TryParse(Console.ReadLine(), out double MontoDeposito))
                     {
-                    Cuenta.Depositar(MontoDeposito);//Llama al metodo Depositar
-                    Console.Clear();
+                        CuentaSeleccionada.Depositar(MontoDeposito);//Llama al metodo Depositar
+                        Console.Clear();
                     }
-                    else 
+                    else
                     {
-                           
+
                         Console.WriteLine("Monto inválido. Por favor, ingrese un número válido.");
                         Console.ReadKey();
                         Console.Clear();
                     }
-                        break;
+                    break;
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Ingrese el monto a retirar:");
                     if (double.TryParse(Console.ReadLine(), out double MontoRetiro))
                     {
-                        Cuenta.Retirar(MontoRetiro);//Llama al metodo Retirar
+                        CuentaSeleccionada.Retirar(MontoRetiro);//Llama al metodo Retirar
                         Console.Clear();
                     }
                     else
                     {
-                            Console.WriteLine("Monto inválido. Por favor, ingrese un número válido.");
-                            Console.ReadKey();
-                            Console.Clear();
-                        }
-                        break;
+                        Console.WriteLine("Monto inválido. Por favor, ingrese un número válido.");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
+                    break;
                 case 3:
                     Console.Clear();
-                    Cuenta.ConsultarSaldo();//Llama al metodo ConsultarSaldo
+                    CuentaSeleccionada.ConsultarSaldo();//Llama al metodo ConsultarSaldo
                     Console.Clear();
                     break;
                 case 4:
                     Console.Clear();
-                    Cuenta.ConsultarMovimientos();//Llama al metodo ConsultarMovimientos
+                    CuentaSeleccionada.ConsultarMovimientos();//Llama al metodo ConsultarMovimientos
                     Console.Clear();
                     break;
                 case 5:
@@ -131,7 +164,7 @@ class program
                     string ClaveActual = Console.ReadLine();//Lee la clave actual
                     Console.WriteLine("Ingrese su nueva clave:");
                     string NuevaClave = Console.ReadLine();//Lee la nueva clave
-                    Cuenta.CambiarClave(ClaveActual, NuevaClave);//Llama al metodo CambiarClave
+                    CuentaSeleccionada.CambiarClave(ClaveActual, NuevaClave);//Llama al metodo CambiarClave
                     Console.Clear();
                     break;
                 case 6:

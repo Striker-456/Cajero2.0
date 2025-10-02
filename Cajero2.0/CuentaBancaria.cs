@@ -26,14 +26,15 @@ namespace Cajero
         public string ArchivoCuenta;
 
 
-        public CuentaBancaria(string NumeroCuenta, string titular)
+        public CuentaBancaria(string numeroCuenta, string titular)
         {
             this.Titular = titular;
-            this.NumeroCuenta = NumeroCuenta;// Asigna el numero de cuenta a la variable de instancia
-            ArchivoCuenta = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}";//Ruta del directorio de la cuenta
-            ArchivoSaldo = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\Saldo.txt";//Ruta del archivo de saldo
-            ArchivoClave = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\clave.txt";//Ruta del archivo de clave
-            ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\usuario{NumeroCuenta}\\movimientos.txt";//Ruta del archivo de movimientoss
+            this.NumeroCuenta = numeroCuenta;// Asigna el numero de cuenta a la variable de instancia
+
+            ArchivoCuenta = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\Cuenta Bancaria de {Titular}";//Ruta del directorio de la cuenta
+            ArchivoSaldo = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\Cuenta Bancaria de {Titular}\\Saldo.txt";//Ruta del archivo de saldo
+            ArchivoClave = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\Cuenta Bancaria de {Titular}\\clave.txt";//Ruta del archivo de clave
+            ArchivoMovimientos = $"C:\\Users\\hecto\\Downloads\\Cajero2.0\\Cuenta Bancaria de {Titular}\\movimientos.txt";//Ruta del archivo de movimientoss
 
             Movimientos = new List<string>();   //Con este comando esta inicializando la lista
 
@@ -56,6 +57,33 @@ namespace Cajero
             string[] Lineas = File.ReadAllLines(ArchivoMovimientos);//Lee todas las lineas del archivo de movimientos y las asigna a un array
             Movimientos.AddRange(Lineas);
             Titular = titular;
+        }
+
+        public void IniciarSesion()//Este metodo inicia sesion en la cuenta
+        {
+            int intentos = 0;//Contador de intentos
+            bool acceso = false;//Variable que indica si el usuario tiene acceso o no
+            while (intentos < 3 && !acceso)//El usuario tiene 3 intentos para ingresar la clave
+            {
+                Console.WriteLine("Ingrese su clave:");
+                string claveIngresada = Console.ReadLine();//Lee la clave ingresada por el usuario
+                if (VerificarClave(claveIngresada))//Verifica si la clave es correcta
+                {
+                    acceso = true;//Si la clave es correcta, el usuario tiene acceso
+                    Console.WriteLine("Acceso concedido. Bienvenido a su cuenta.");
+                    Console.ReadKey();//Espera a que el usuario presione una tecla
+                }
+                else//Si la clave es incorrecta
+                {
+                    intentos++;//Incrementa el contador de intentos
+                    Console.WriteLine("Clave incorrecta. Intentos restantes: " + (3 - intentos));//Muestra los intentos restantes
+                    Console.ReadKey();//Espera a que el usuario presione una tecla
+                }
+            }
+            if (!acceso)//Si el usuario no tiene acceso, sale del sistema
+            {
+                Console.WriteLine("Demasiados intentos fallidos. Saliendo del sistema.");
+            }
         }
         public bool VerificarClave(string claveIngresada)//Este metodo verifica si la clave ingresada es correcta
         {
@@ -129,7 +157,7 @@ namespace Cajero
         }
         private void RegistrarMovimiento(string Movimiento)//Este metodo registra un movimiento en la lista y en el archivo
         {
-            string Registro = $"cuenta {NumeroCuenta}: {Movimiento} | {DateTime.Now}";//Crea el registro del movimiento
+            string Registro = $" {Titular} {NumeroCuenta}: {Movimiento} | {DateTime.Now}";//Crea el registro del movimiento
             Movimientos.Add(Registro); //Agrega el movimiento a la lista
             File.AppendAllText(ArchivoMovimientos, Registro + Environment.NewLine); //Escribe el movimiento en el archivo
         }
